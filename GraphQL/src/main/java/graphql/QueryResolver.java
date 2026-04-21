@@ -1,6 +1,7 @@
 package graphql;
 
 // Import the business logic class responsible for managing "UniteEnseignement" data
+import business.ModuleBusiness;
 import business.UniteEnseignementBusiness;
 
 // Import the GraphQL library class used to define the root of GraphQL queries
@@ -52,5 +53,16 @@ public class QueryResolver implements GraphQLRootResolver {
         // Delegates the request to the business layer method getListeUE()
         // which fetches all UE entities (e.g., from a database or a static list)
         return helper.getListeUE();
+    }
+
+    public UniteEnseignement getUeByCode(int code){
+        return helper.getUEByCode(code);
+    }
+    public List<Module> allModules() {
+        return ModuleBusiness.getAllModules();
+    }
+
+    public Module getModuleByCode(String code) {
+        return ModuleBusiness.getModuleByCode(code);
     }
 }

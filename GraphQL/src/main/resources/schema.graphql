@@ -7,6 +7,7 @@ type UniteEnseignement {
 }
 type QueryResolver {
     allUEs: [UniteEnseignement]
+    getUeByCode(code: Int!): UniteEnseignement
 }
 
 
@@ -18,7 +19,50 @@ type MutationResolver {
         credits: Int!
         semestre: Int!
     ): Boolean
+     deleteUniteEnseignement(code: Int!): Boolean
+     updateUniteEnseignement(
+             code: Int!
+             domaine: String!
+             responsable: String!
+             credits: Int!
+             semestre: Int!
+         ): Boolean
 
+}
+type Module {
+    code: String
+    name: String
+    type: TypeModule
+}
+
+enum TypeModule {
+    TRANSVERSAL
+    PROFESSIONAL
+    RESEARCH
+}
+
+
+type QueryResolver {
+    allModules: [Module]
+    getModuleByCode(code: String!): Module
+}
+
+
+type MutationResolver {
+
+    addModule(
+        code: String!
+        name: String!
+        type: TypeModule!
+    ): Boolean
+
+    updateModule(
+        code: String!
+        name: String!
+        type: TypeModule!
+    ): Boolean
+
+    deleteModule(code: String!): Boolean
 }
 schema {
     query: QueryResolver
